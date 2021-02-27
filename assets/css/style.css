@@ -49,6 +49,10 @@ textarea{
 }
 
 .saveBtn {
+  position:absolute;
+  top:0;
+  left:0;
+  height: 100%;
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -66,6 +70,12 @@ textarea{
   white-space: pre-wrap;
 }
 
+.to-do-text{
+  position: absolute;
+  top:0;
+  height: 100%;
+}
+
 .button-wrapper{
-  padding:0;
+  padding: 0;
 }
