@@ -3,7 +3,7 @@ var rightNow = moment();
 var today = rightNow.format('MMMM Do YYYY');
 var currentTime  = rightNow.format('LT')
 var currentHour = rightNow.set('minute', 00);
-var scheduleEl = $(".time-block");
+var scheduleEl = $(".hour");
 
 
 $('#currentDay').text('Today is: ' + today);
