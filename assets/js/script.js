@@ -47,19 +47,30 @@ var loadCal = function(){
     //if calendarJSON exists, parse to string.  otherwise set up empty array
     if(calendarJSON){
         calendar = JSON.parse(calendarJSON);
+
+        for(i = 7; i < 19; i++){
+            // find first value in array
+            var calItem = calendar.find((x => x.id === i))
+            //set id value to variable
+            var calId = calItem.id;
+            //set text value to variable
+            var calText = calItem.val;
+            //identify date object was created
+            var calDate = calItem.date;
+            //if calendar item was created today
+            if(calDate == rightNow.format('DD')){
+            //set text box at id calId to text value calText
+            document.getElementById(calId).value = calText;  
+            }
+            else{
+            document.getElementById(calId).value = "";
+            };
+        }
     }
+    //otherwise set empty text value
     else{calendar = []};
     //loop through all array items
-    for(i = 7; i < 19; i++){
-        // find first value in array
-       var calItem = calendar.find((x => x.id === i))
-       //set id value to variable
-       var calId = calItem.id;
-       //set text value to variable
-       var calText = calItem.val;
-       //set text box at id calId to text value calText
-       document.getElementById(calId).value = calText;
-    }
+
 };
 
 
@@ -70,8 +81,9 @@ $('.saveBtn').click(function(){
     for(i=7; i<19; i++){
     var calText = document.getElementById(i).value;
     var calId = i;
+    var calDate = rightNow.format('DD')
     //add values and textbox id to array
-    var calObj = {id: calId, val: calText};
+    var calObj = {id: calId, val: calText, date: calDate};
     console.log(calObj);
     calendar.push(calObj);
 }
