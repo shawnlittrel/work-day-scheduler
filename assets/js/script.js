@@ -4,8 +4,7 @@ var today = rightNow.format('MMMM Do YYYY');
 var currentTime  = rightNow.format('LT')
 var currentHour = rightNow.set('minute', 00);
 var scheduleEl = $(".hour");
-
-
+var calendar
 $('#currentDay').text('Today is: ' + today);
 $('#currentTime').text('The time is: ' + currentTime);
 //put date picker into header?  will always load previous days tasks
@@ -33,12 +32,51 @@ var timeCheck = function(timeEl){
         if(moment(i, 'hour').isBefore(currentHour, 'hour')){
             hourElement.classList.add("past");
         };    
-    };
-    
+    };  
 };
 
+//save all tasks to localStorage
+var saveCal = function(){
+    localStorage.setItem("calendar", JSON.stringify(calendar));
+};
+
+//parse localstorage from json, if no json start with empty array
+var loadCal = function(){
+    //pull JSON from localStorage
+    calendarJSON = localStorage.getItem('calendar');
+    //if calendarJSON exists, parse to string.  otherwise set up empty array
+    if(calendarJSON){
+        calendar = JSON.parse(calendarJSON);
+    }
+    else{calendar = []};
+    //loop through all array items
+    for(i = 7; i < 19; i++){
+        // find first value in array
+       var calItem = calendar.find((x => x.id === i))
+       //set id value to variable
+       var calId = calItem.id;
+       //set text value to variable
+       var calText = calItem.val;
+       //set text box at id calId to text value calText
+       document.getElementById(calId).value = calText;
+    }
+};
+
+
+//push values to array on save button click
+
+$('.saveBtn').click(function(){
+    //get values from textboxes
+    for(i=7; i<19; i++){
+    var calText = document.getElementById(i).value;
+    var calId = i;
+    //add values and textbox id to array
+    var calObj = {id: calId, val: calText};
+    console.log(calObj);
+    calendar.push(calObj);
+}
+saveCal();
+});
+
+loadCal();
 timeCheck(scheduleEl);
-
-//save all tasks save button click
-
-
