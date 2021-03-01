@@ -84,7 +84,6 @@ $('.saveBtn').click(function(){
     var calDate = rightNow.format('DD')
     //add values and textbox id to array
     var calObj = {id: calId, val: calText, date: calDate};
-    console.log(calObj);
     calendar.push(calObj);
 }
 saveCal();
